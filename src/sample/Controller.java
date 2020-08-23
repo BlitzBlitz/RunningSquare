@@ -59,16 +59,13 @@ public class Controller {
         moveWall.setFromY(circle.getScene().getHeight());
         moveWall.setToY(wall.getWidth()*-2);
 
-        moveWall.setOnFinished(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                double movement = Math.random() * circle.getScene().getWidth();
-                wall.setWidth(movement);
-                wall.setX(movement/2);
-                points++;
-                pointLabel.setText(Long.toString(points));
-                moveWall.playFromStart();
-            }
+        moveWall.setOnFinished(event -> {
+            double movement = Math.random() * circle.getScene().getWidth();
+            wall.setWidth(movement);
+            wall.setX(movement/2);
+            points++;
+            pointLabel.setText(Long.toString(points));
+            moveWall.playFromStart();
         });
         moveWall.setNode(wall);
         moveWall.play();
@@ -97,7 +94,7 @@ public class Controller {
                             }
                             Alert gameover = new Alert(Alert.AlertType.CONFIRMATION);
                             gameover.setHeaderText("Gameover!");
-                            gameover.setContentText("Score: " + points + "\nDo you want to play agian?");
+                            gameover.setContentText("Score: " + points + "\nDo you want to play again?");
                             Optional<ButtonType> result = gameover.showAndWait();
                             if(result.get().equals(ButtonType.OK)){
                                 moveWall.setFromY(circle.getScene().getHeight());
