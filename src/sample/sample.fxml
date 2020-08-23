@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" hgap="10" prefHeight="500.0" prefWidth="500.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <children>
+      <Label fx:id="pointLabel" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+         <font>
+            <Font name="OCR A Extended" size="48.0" />
+         </font>
+      </Label>
+      <Pane prefHeight="500.0" prefWidth="500.0">
+         <children>
+            <Circle fx:id="circle" fill="DODGERBLUE" layoutX="250.0" layoutY="250.0" onKeyPressed="#handleMoves" radius="25.0" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle fx:id="wall" arcHeight="4.0" arcWidth="4.0" fill="DODGERBLUE" height="50.0" stroke="BLACK" strokeMiterLimit="4.0" strokeType="INSIDE" width="150.0" />
+         </children></Pane>
+   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+</GridPane>
