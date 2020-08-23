@@ -80,30 +80,27 @@ public class Controller {
                     try {
                         Thread.sleep(15);
                     }catch (Exception e){
-
+                        e.printStackTrace();
                     }
                 }
                 if((wall.getBoundsInParent().intersects(circle.getBoundsInParent()))){
-                    Platform.runLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            moveWall.stop();
-                            if(points > GameData.getInstance().getTopScore()){
-                                GameData.getInstance().setTopScore(points);
-                                displayTopScore();
-                            }
-                            Alert gameover = new Alert(Alert.AlertType.CONFIRMATION);
-                            gameover.setHeaderText("Gameover!");
-                            gameover.setContentText("Score: " + points + "\nDo you want to play again?");
-                            Optional<ButtonType> result = gameover.showAndWait();
-                            if(result.get().equals(ButtonType.OK)){
-                                moveWall.setFromY(circle.getScene().getHeight());
-                                circle.setLayoutY(circle.getScene().getHeight()/3);
-                                circle.setLayoutX(circle.getScene().getWidth()/3);
-                                initialize();
-                            }else {
-                                Platform.exit();
-                            }
+                    Platform.runLater(() -> {
+                        moveWall.stop();
+                        if(points > GameData.getInstance().getTopScore()){
+                            GameData.getInstance().setTopScore(points);
+                            displayTopScore();
+                        }
+                        Alert gameover = new Alert(Alert.AlertType.CONFIRMATION);
+                        gameover.setHeaderText("Gameover!");
+                        gameover.setContentText("Score: " + points + "\nDo you want to play again?");
+                        Optional<ButtonType> result = gameover.showAndWait();
+                        if(result.isPresent() && result.get().equals(ButtonType.OK)){
+                            moveWall.setFromY(circle.getScene().getHeight());
+                            circle.setLayoutY(circle.getScene().getHeight()/3);
+                            circle.setLayoutX(circle.getScene().getWidth()/3);
+                            initialize();
+                        }else {
+                            Platform.exit();
                         }
                     });
                 }
